@@ -7,9 +7,22 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LoginComponent implements OnInit {
 
+  loginform = true;
+  recoverform = false;
+
+  user$: Object = {};
+
   constructor() { }
 
   ngOnInit() {
   }
 
+  showRecoverForm() {
+  	this.loginform = !this.loginform;
+  	this.recoverform = !this.recoverform;
+  }
+
+  onLogin() {
+    console.log("Logged in");
+  }
 }
