@@ -1,0 +1,17 @@
+@import "../../assets/scss/variable.scss";
+
+.auth-wrapper {
+    min-height: 100vh;
+    position: relative;
+    .auth-box {
+        background: $white;
+        padding: 20px;
+        box-shadow: $shadow;
+        max-width: 400px;
+        width: 90%;
+        margin: 10% 0;
+        .logo {
+            text-align: center;
+        }
+    }
+}
