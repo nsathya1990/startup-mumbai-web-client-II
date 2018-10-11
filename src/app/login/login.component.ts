@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs'; //third party plugin
+import { DataService } from '../data.service';
 
 @Component({
   selector: 'app-login',
@@ -11,8 +13,9 @@ export class LoginComponent implements OnInit {
   recoverform = false;
 
   user$: Object = {};
+  data$: Object = {};
 
-  constructor() { }
+  constructor(private data: DataService) { }
 
   ngOnInit() {
   }
@@ -24,5 +27,6 @@ export class LoginComponent implements OnInit {
 
   onLogin() {
     console.log("Logged in");
+    this.data.postLogin(this.user$).subscribe(data => this.data$ = data);
   }
 }
