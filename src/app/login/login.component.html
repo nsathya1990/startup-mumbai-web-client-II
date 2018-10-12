@@ -16,9 +16,10 @@
               </div>
               <input id="username" name="username" type="text" class="form-control form-control-lg" placeholder="Username"
                 aria-label="Username" aria-describedby="basic-addon1" #username="ngModel" [(ngModel)]="user$.username"
-                [ngClass]="{ 'is-invalid': f.submitted && username.invalid }" required>
+                [ngClass]="{ 'is-invalid': f.submitted && username.invalid }" minlength=4 required>
               <div *ngIf="f.submitted && username.invalid" class="invalid-feedback">
                 <div *ngIf="username.errors.required">Username is required</div>
+                <div *ngIf="username.errors.minlength">Username must be of atleast 4 characters</div>
               </div>
             </div>
             <div class="input-group mb-3">
