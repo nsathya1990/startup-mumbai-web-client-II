@@ -1,0 +1,77 @@
+<div class="auth-wrapper d-flex no-block justify-content-center align-items-center" style="background:url(assets/images/big/auth-bg.jpg) no-repeat center center;">
+  <div class="auth-box">
+    <div>
+      <div class="logo">
+        <!-- <span class="db"><img src="assets/images/logo-icon.png" alt="logo" /></span> -->
+        <h5 class="font-medium m-b-20">Sign Up</h5>
+      </div>
+      <!-- Form -->
+      <div class="row">
+        <div class="col-12">
+          <form class="form-horizontal m-t-20" name="registerform" #f="ngForm" (ngSubmit)="f.form.valid">
+            <div class="form-group row ">
+              <div class="col-12 ">
+                <input class="form-control form-control-lg" type="text" placeholder="Name" name="Name" #Name="ngModel"
+                  [(ngModel)]="user.Name" [ngClass]="{ 'is-invalid': f.submitted && Name.invalid }" required>
+                <div *ngIf="f.submitted && Name.invalid" class="invalid-feedback">
+                  <div *ngIf="Name.errors.required">*Username is required</div>
+                </div>
+              </div>
+            </div>
+            <div class="form-group row">
+              <div class="col-12 ">
+                <input class="form-control form-control-lg" type="text" placeholder="Email" name="Email" #Email="ngModel"
+                  [(ngModel)]="user.Email" [ngClass]="{ 'is-invalid': f.submitted && Email.invalid }" required>
+                <div *ngIf="f.submitted && Email.invalid" class="invalid-feedback">
+                  <div *ngIf="Email.errors.required">*Email is required</div>
+                </div>
+              </div>
+            </div>
+            <div class="form-group row">
+              <div class="col-12 ">
+                <input class="form-control form-control-lg" type="password" placeholder="Password" name="Password"
+                  #Password="ngModel" [(ngModel)]="user.Password" [ngClass]="{ 'is-invalid': f.submitted && Password.invalid }"
+                  required>
+                <div *ngIf="f.submitted && Password.invalid" class="invalid-feedback">
+                  <div *ngIf="Password.errors.required">*Password is required</div>
+                </div>
+              </div>
+            </div>
+            <div class="form-group row">
+              <div class="col-12 ">
+                <input class="form-control form-control-lg" type="password" placeholder="Confirm Password" name="ConfirmPwd"
+                  #ConfirmPwd="ngModel" [(ngModel)]="user.ConfirmPwd" [ngClass]="{ 'is-invalid': f.submitted && ConfirmPwd.invalid}"
+                  required>
+                <div *ngIf="f.submitted && ConfirmPwd.invalid" class="invalid-feedback">
+                  <div *ngIf="ConfirmPwd.errors.required">*Password is required</div>
+                </div>
+              </div>
+            </div>
+            <div class="form-group row">
+              <div class="col-md-12 ">
+                <div class="custom-control custom-checkbox">
+                  <input type="checkbox" class="custom-control-input" id="customCheck1" name="terms" #terms="ngModel"
+                    [(ngModel)]="user.terms" [ngClass]="{ 'is-invalid': f.submitted && terms.invalid}" required>
+                    <label class="custom-control-label" for="customCheck1">I agree to all <a href="javascript:void(0)">Terms</a></label> 
+                    <div *ngIf="f.submitted && terms.invalid" class="invalid-feedback">
+                      <div *ngIf="terms.errors.required">*Please accept the Terms.</div>
+                    </div>
+                  </div>
+              </div>
+            </div>
+            <div class="form-group text-center ">
+              <div class="col-xs-12 p-b-20 ">
+                <button class="btn btn-block btn-lg btn-info" type="submit" (onclick)="addUser()">SIGN UP</button>
+              </div>
+            </div>
+            <div class="form-group m-b-0 m-t-10 ">
+              <div class="col-sm-12 text-center ">
+                Already have an account? <a href="/login " class="text-info m-l-5 "><b>Sign In</b></a>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
