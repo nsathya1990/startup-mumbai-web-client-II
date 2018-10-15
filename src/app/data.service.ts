@@ -10,6 +10,6 @@ export class DataService {
 
   //login
   postLogin(data) {
-    return this.http.post('http://localhost:3000/api/login', data);
+    return this.http.post('https://startup-mumbai-api-as.herokuapp.com/api/login', data);
   }
 }

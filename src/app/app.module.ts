@@ -8,6 +8,8 @@ import { LoginComponent } from './login/login.component';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 
+import {ToastaModule} from 'ngx-toasta';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -17,7 +19,9 @@ import { HttpClientModule } from '@angular/common/http';
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    ToastaModule.forRoot() // ToastaModule added
+
   ],
   providers: [],
   bootstrap: [AppComponent]
