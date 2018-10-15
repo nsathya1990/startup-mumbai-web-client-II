@@ -8,7 +8,7 @@
       <!-- Form -->
       <div class="row">
         <div class="col-12">
-          <form class="form-horizontal m-t-20" name="registerform" #f="ngForm" (ngSubmit)="f.form.valid">
+          <form class="form-horizontal m-t-20" name="registerform" #f="ngForm" (ngSubmit)="f.form.valid && addUser()">
             <div class="form-group row ">
               <div class="col-12 ">
                 <input class="form-control form-control-lg" type="text" placeholder="Name" name="Name" #Name="ngModel"
@@ -20,10 +20,11 @@
             </div>
             <div class="form-group row">
               <div class="col-12 ">
-                <input class="form-control form-control-lg" type="text" placeholder="Email" name="Email" #Email="ngModel"
-                  [(ngModel)]="user.Email" [ngClass]="{ 'is-invalid': f.submitted && Email.invalid }" required>
+                <input class="form-control form-control-lg" type="email" placeholder="Email" name="Email" #Email="ngModel"
+                  [(ngModel)]="user.Email" [ngClass]="{ 'is-invalid': f.submitted && Email.invalid }" email required>
                 <div *ngIf="f.submitted && Email.invalid" class="invalid-feedback">
                   <div *ngIf="Email.errors.required">*Email is required</div>
+                  <div *ngIf="Email.errors.email">*Email must be valid</div>
                 </div>
               </div>
             </div>
@@ -40,10 +41,13 @@
             <div class="form-group row">
               <div class="col-12 ">
                 <input class="form-control form-control-lg" type="password" placeholder="Confirm Password" name="ConfirmPwd"
-                  #ConfirmPwd="ngModel" [(ngModel)]="user.ConfirmPwd" [ngClass]="{ 'is-invalid': f.submitted && ConfirmPwd.invalid}"
+                  #ConfirmPwd="ngModel" [(ngModel)]="user.ConfirmPwd" [ngClass]="{ 'is-invalid': f.submitted && ConfirmPwd.invalid, 'is-invalid': f.submitted &&  !(ConfirmPwd.value == Password.value)}"
                   required>
                 <div *ngIf="f.submitted && ConfirmPwd.invalid" class="invalid-feedback">
-                  <div *ngIf="ConfirmPwd.errors.required">*Password is required</div>
+                  <div *ngIf="ConfirmPwd.errors.required">*Confirm Password is required</div>
+                </div>
+                <div *ngIf="f.submitted &&  !(ConfirmPwd.value == Password.value)" class="invalid-feedback" >
+                  <div>*Password Mismatch</div>
                 </div>
               </div>
             </div>
@@ -61,7 +65,7 @@
             </div>
             <div class="form-group text-center ">
               <div class="col-xs-12 p-b-20 ">
-                <button class="btn btn-block btn-lg btn-info" type="submit" (onclick)="addUser()">SIGN UP</button>
+                <button class="btn btn-block btn-lg btn-info" type="submit">SIGN UP</button>
               </div>
             </div>
             <div class="form-group m-b-0 m-t-10 ">
