@@ -11,42 +11,42 @@
           <form class="form-horizontal m-t-20" name="registerform" #f="ngForm" (ngSubmit)="f.form.valid && addUser()">
             <div class="form-group row ">
               <div class="col-12 ">
-                <input class="form-control form-control-lg" type="text" placeholder="Name" name="Name" #Name="ngModel"
-                  [(ngModel)]="user.Name" [ngClass]="{ 'is-invalid': f.submitted && Name.invalid }" required>
-                <div *ngIf="f.submitted && Name.invalid" class="invalid-feedback">
-                  <div *ngIf="Name.errors.required">*Username is required</div>
+                <input class="form-control form-control-lg" type="text" placeholder="Name" name="name" #name="ngModel"
+                  [(ngModel)]="user.name" [ngClass]="{ 'is-invalid': f.submitted && name.invalid }" required>
+                <div *ngIf="f.submitted && name.invalid" class="invalid-feedback">
+                  <div *ngIf="name.errors.required">*Username is required</div>
                 </div>
               </div>
             </div>
             <div class="form-group row">
               <div class="col-12 ">
-                <input class="form-control form-control-lg" type="email" placeholder="Email" name="Email" #Email="ngModel"
-                  [(ngModel)]="user.Email" [ngClass]="{ 'is-invalid': f.submitted && Email.invalid }" email required>
-                <div *ngIf="f.submitted && Email.invalid" class="invalid-feedback">
-                  <div *ngIf="Email.errors.required">*Email is required</div>
-                  <div *ngIf="Email.errors.email">*Email must be valid</div>
+                <input class="form-control form-control-lg" type="email" placeholder="Email" name="email" #email="ngModel"
+                  [(ngModel)]="user.email" [ngClass]="{ 'is-invalid': f.submitted && email.invalid }" email required>
+                <div *ngIf="f.submitted && email.invalid" class="invalid-feedback">
+                  <div *ngIf="email.errors.required">*Email is required</div>
+                  <div *ngIf="email.errors.email">*Email must be valid</div>
                 </div>
               </div>
             </div>
             <div class="form-group row">
               <div class="col-12 ">
-                <input class="form-control form-control-lg" type="password" placeholder="Password" name="Password"
-                  #Password="ngModel" [(ngModel)]="user.Password" [ngClass]="{ 'is-invalid': f.submitted && Password.invalid }"
+                <input class="form-control form-control-lg" type="password" placeholder="Password" name="password"
+                  #password="ngModel" [(ngModel)]="user.password" [ngClass]="{ 'is-invalid': f.submitted && password.invalid }"
                   required>
-                <div *ngIf="f.submitted && Password.invalid" class="invalid-feedback">
-                  <div *ngIf="Password.errors.required">*Password is required</div>
+                <div *ngIf="f.submitted && password.invalid" class="invalid-feedback">
+                  <div *ngIf="password.errors.required">*Password is required</div>
                 </div>
               </div>
             </div>
             <div class="form-group row">
               <div class="col-12 ">
-                <input class="form-control form-control-lg" type="password" placeholder="Confirm Password" name="ConfirmPwd"
-                  #ConfirmPwd="ngModel" [(ngModel)]="user.ConfirmPwd" [ngClass]="{ 'is-invalid': f.submitted && ConfirmPwd.invalid, 'is-invalid': f.submitted &&  !(ConfirmPwd.value == Password.value)}"
+                <input class="form-control form-control-lg" type="password" placeholder="Confirm Password" name="confirmPwd"
+                  #confirmPwd="ngModel" [(ngModel)]="user.confirmPwd" [ngClass]="{ 'is-invalid': f.submitted && confirmPwd.invalid, 'is-invalid': f.submitted &&  !(confirmPwd.value == password.value)}"
                   required>
-                <div *ngIf="f.submitted && ConfirmPwd.invalid" class="invalid-feedback">
-                  <div *ngIf="ConfirmPwd.errors.required">*Confirm Password is required</div>
+                <div *ngIf="f.submitted && confirmPwd.invalid" class="invalid-feedback">
+                  <div *ngIf="confirmPwd.errors.required">*Confirm Password is required</div>
                 </div>
-                <div *ngIf="f.submitted &&  !(ConfirmPwd.value == Password.value)" class="invalid-feedback" >
+                <div *ngIf="f.submitted &&  !(confirmPwd.value == password.value)" class="invalid-feedback">
                   <div>*Password Mismatch</div>
                 </div>
               </div>
@@ -56,11 +56,11 @@
                 <div class="custom-control custom-checkbox">
                   <input type="checkbox" class="custom-control-input" id="customCheck1" name="terms" #terms="ngModel"
                     [(ngModel)]="user.terms" [ngClass]="{ 'is-invalid': f.submitted && terms.invalid}" required>
-                    <label class="custom-control-label" for="customCheck1">I agree to all <a href="javascript:void(0)">Terms</a></label> 
-                    <div *ngIf="f.submitted && terms.invalid" class="invalid-feedback">
-                      <div *ngIf="terms.errors.required">*Please accept the Terms.</div>
-                    </div>
+                  <label class="custom-control-label" for="customCheck1">I agree to all <a href="javascript:void(0)">Terms</a></label>
+                  <div *ngIf="f.submitted && terms.invalid" class="invalid-feedback">
+                    <div *ngIf="terms.errors.required">*Please accept the Terms.</div>
                   </div>
+                </div>
               </div>
             </div>
             <div class="form-group text-center ">

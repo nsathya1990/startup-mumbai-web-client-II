@@ -8,7 +8,7 @@ export class SignUpService {
 
   constructor(private http: HttpClient) { }
 
-  postNewUser(data){
-    return this.http.post('', data)
-  } 
+  postNewUser(data) {
+    return this.http.post('https://startup-mumbai-api-sb.herokuapp.com/auth/signup', data);
+  }
 }
