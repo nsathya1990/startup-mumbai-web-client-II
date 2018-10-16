@@ -18,7 +18,7 @@
                 <span class="input-group-text" id="basic-addon1"><i class="ti-email"></i></span>
               </div>
               <input id="emailid" name="emailid" type="email" class="form-control form-control-lg" placeholder="Email"
-                aria-label="Emailid" aria-describedby="basic-addon1" #emailid="ngModel" [(ngModel)]="user$.emailid"
+                aria-label="Emailid" aria-describedby="basic-addon1" #emailid="ngModel" [(ngModel)]="user$.email"
                 [ngClass]="{ 'is-invalid': f.submitted && emailid.invalid }" email required>
               <div *ngIf="f.submitted && emailid.invalid" class="invalid-feedback">
                 <div *ngIf="emailid.errors.required">Email is required</div>
@@ -41,7 +41,7 @@
                 <div class="custom-control custom-checkbox">
                   <input type="checkbox" class="custom-control-input" id="customCheck1">
                   <label class="custom-control-label" for="customCheck1">Remember me</label>
-                  <a (click)="showRecoverForm()" href="javascript:void(0)" id="to-recover" class="text-dark float-right"><i
+                  <a (click)="showRecoverNLoginForm()" href="javascript:void(0)" id="to-recover" class="text-dark float-right"><i
                       class="fa fa-lock m-r-5"></i>
                     Forgot pwd?</a>
                 </div>
@@ -84,11 +84,15 @@
       </div>
       <div class="row m-t-20">
         <!-- Form -->
-        <form class="col-12">
+        <form class="col-12" id="resetPwdForm" #g="ngForm" (ngSubmit)="g.form.valid && resetPassword()" novalidate>
           <!-- email -->
           <div class="form-group row">
             <div class="col-12">
-              <input class="form-control form-control-lg" type="email" required="" placeholder="Username">
+              <input id="resetpwd" class="form-control form-control-lg" name="resetpwd" type="email" placeholder="Username" class="form-control form-control-lg" aria-label="resetpwd" #resetpwd="ngModel" [(ngModel)]="user$.reset_emailid" [ngClass]="{ 'is-invalid': g.submitted && resetpwd.invalid }" required>
+              <div *ngIf="g.submitted && resetpwd.invalid" class="invalid-feedback">
+                <div *ngIf="resetpwd.errors.required">Email is required</div>
+                <div *ngIf="resetpwd.errors.email">Email must be valid</div>
+              </div>
             </div>
           </div>
           <!-- pwd -->
