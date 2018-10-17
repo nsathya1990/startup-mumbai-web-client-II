@@ -12,7 +12,9 @@ import { ToastaModule } from 'ngx-toasta';
 import { SignupComponent } from './signup/signup.component';
 import { SignUpService } from './sign-up.service';
 import { HomeComponent } from './home/home.component';
+
 import { LoginComponent } from './login/login.component';
+import { ChangepasswordComponent } from './changepassword/changepassword.component';
 
 
 @NgModule({
@@ -20,10 +22,12 @@ import { LoginComponent } from './login/login.component';
         AppComponent,
         SignupComponent,
         LoginComponent,
-        HomeComponent
+        HomeComponent,
+        ChangepasswordComponent,
     ],
     imports: [
         BrowserModule,
+        BrowserAnimationsModule,
         AppRoutingModule,
         FormsModule,
         HttpClientModule,
