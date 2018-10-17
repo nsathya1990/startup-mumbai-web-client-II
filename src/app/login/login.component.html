@@ -3,31 +3,34 @@
     <div id="loginform" [ngClass]="{'d-none': recoverform}">
       <div class="logo">
         <span class="db"><img src="./../../assets/images/logo-icon.png" alt="logo" /></span>
-        <h5 class="font-medium m-b-20">Sign In to your Account</h5>
+        <h5 class="font-medium m-b-20">Member Login</h5>
       </div>
       <!-- Form -->
       <div class="row">
         <div class="col-12">
           <form class="form-horizontal m-t-30" id="loginform" name="loginform" #f="ngForm" (ngSubmit)="f.form.valid && onLogin()"
             novalidate>
+            <!-- <div *ngIf="data$.status" class="invalid-feedback">
+              <h4 class="font-medium m-b-20">Invalid email address/password combination</h4>
+            </div> -->
             <div class="input-group mb-3">
               <div class="input-group-prepend">
-                <span class="input-group-text" id="basic-addon1"><i class="ti-user"></i></span>
+                <span class="input-group-text" id="basic-addon1"><i class="ti-email"></i></span>
               </div>
-              <input id="username" name="username" type="text" class="form-control form-control-lg" placeholder="Username"
-                aria-label="Username" aria-describedby="basic-addon1" #username="ngModel" [(ngModel)]="user$.username"
-                [ngClass]="{ 'is-invalid': f.submitted && username.invalid }" minlength=4 required>
-              <div *ngIf="f.submitted && username.invalid" class="invalid-feedback">
-                <div *ngIf="username.errors.required">Username is required</div>
-                <div *ngIf="username.errors.minlength">Username must be of atleast 4 characters</div>
+              <input id="emailid" name="emailid" type="email" class="form-control form-control-lg" placeholder="Email"
+                aria-label="Emailid" aria-describedby="basic-addon1" #emailid="ngModel" [(ngModel)]="user$.email"
+                [ngClass]="{ 'is-invalid': f.submitted && emailid.invalid }" email required>
+              <div *ngIf="f.submitted && emailid.invalid" class="invalid-feedback">
+                <div *ngIf="emailid.errors.required">Email is required</div>
+                <div *ngIf="emailid.errors.email">Email must be valid</div>
               </div>
             </div>
             <div class="input-group mb-3">
               <div class="input-group-prepend">
                 <span class="input-group-text" id="basic-addon2"><i class="ti-pencil"></i></span>
               </div>
-              <input type="password" name="password" class="form-control form-control-lg" placeholder="Password" aria-label="Password"
-                aria-describedby="basic-addon1" #password="ngModel" [ngClass]="{ 'is-invalid': f.submitted && password.invalid }"
+              <input type="password" name="password" class="form-control form-control-lg" placeholder="Password"
+                aria-label="Password" aria-describedby="basic-addon1" #password="ngModel" [ngClass]="{ 'is-invalid': f.submitted && password.invalid }"
                 [(ngModel)]="user$.password" required>
               <div *ngIf="f.submitted && password.invalid" class="invalid-feedback">
                 <div *ngIf="password.errors.required">Password is required</div>
@@ -38,7 +41,7 @@
                 <div class="custom-control custom-checkbox">
                   <input type="checkbox" class="custom-control-input" id="customCheck1">
                   <label class="custom-control-label" for="customCheck1">Remember me</label>
-                  <a (click)="showRecoverForm()" href="javascript:void(0)" id="to-recover" class="text-dark float-right"><i
+                  <a (click)="showRecoverNLoginForm()" href="javascript:void(0)" id="to-recover" class="text-dark float-right"><i
                       class="fa fa-lock m-r-5"></i>
                     Forgot pwd?</a>
                 </div>
@@ -53,10 +56,12 @@
             <div class="row">
               <div class="col-xs-12 col-sm-12 col-md-12 m-t-10 text-center">
                 <div class="social">
-                  <a href="#" class="btn btn-facebook m-r-5" data-toggle="tooltip" title="" data-original-title="Login with Facebook">
+                  <a href="https://startup-mumbai-api-as.herokuapp.com/auth/facebook" target="_blank" class="btn btn-facebook m-r-5"
+                    data-toggle="tooltip" title="" data-original-title="Login with Facebook">
                     <i aria-hidden="true" class="fab fa-facebook"></i>
                   </a>
-                  <a href="#" class="btn btn-googleplus" data-toggle="tooltip" title="" data-original-title="Login with Google">
+                  <a href="https://startup-mumbai-api-as.herokuapp.com/auth/google" class="btn btn-googleplus"
+                    data-toggle="tooltip" title="" data-original-title="Login with Google">
                     <i aria-hidden="true" class="fab fa-google-plus"></i>
                   </a>
                 </div>
@@ -64,7 +69,7 @@
             </div>
             <div class="form-group m-b-0 m-t-10">
               <div class="col-sm-12 text-center">
-                Don't have an account? <a href="#" class="text-info m-l-5"><b>Sign Up</b></a>
+                Don't have an account? <a routerLink="/signup" class="text-info m-l-5"><b>Sign Up</b></a>
               </div>
             </div>
           </form>
@@ -79,11 +84,15 @@
       </div>
       <div class="row m-t-20">
         <!-- Form -->
-        <form class="col-12">
+        <form class="col-12" id="resetPwdForm" #g="ngForm" (ngSubmit)="g.form.valid && resetPassword()" novalidate>
           <!-- email -->
           <div class="form-group row">
             <div class="col-12">
-              <input class="form-control form-control-lg" type="email" required="" placeholder="Username">
+              <input id="resetpwd" class="form-control form-control-lg" name="resetpwd" type="email" placeholder="Username" class="form-control form-control-lg" aria-label="resetpwd" #resetpwd="ngModel" [(ngModel)]="user$.reset_emailid" [ngClass]="{ 'is-invalid': g.submitted && resetpwd.invalid }" required>
+              <div *ngIf="g.submitted && resetpwd.invalid" class="invalid-feedback">
+                <div *ngIf="resetpwd.errors.required">Email is required</div>
+                <div *ngIf="resetpwd.errors.email">Email must be valid</div>
+              </div>
             </div>
           </div>
           <!-- pwd -->
@@ -96,4 +105,5 @@
       </div>
     </div>
   </div>
+  <ngx-toasta [position]="'bottom-right'"></ngx-toasta>
 </div>
