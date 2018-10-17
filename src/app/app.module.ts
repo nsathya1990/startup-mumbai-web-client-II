@@ -12,12 +12,14 @@ import { ToastrModule } from 'ngx-toastr';
 import { SignupComponent } from './signup/signup.component';
 import { SignUpService } from './sign-up.service';
 import { HomeComponent } from './home/home.component';
+import { ChangepasswordComponent } from './changepassword/changepassword.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     SignupComponent,
-    HomeComponent
+    HomeComponent,
+    ChangepasswordComponent,
   ],
   imports: [
     BrowserModule,
