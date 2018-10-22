@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
+import { NgbModule  } from "@ng-bootstrap/ng-bootstrap";
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 
@@ -10,12 +11,12 @@ import { ToastrModule } from 'ngx-toastr';
 import { ToastaModule } from 'ngx-toasta';
 
 import { SignupComponent } from './signup/signup.component';
-import { SignUpService } from './sign-up.service';
-import { HomeComponent } from './home/home.component';
-
 import { LoginComponent } from './login/login.component';
 import { ChangepasswordComponent } from './changepassword/changepassword.component';
+import { HomeComponent } from './home/home.component';
+import { ProfilesComponent } from './profiles/profiles.component';
 
+import { SignUpService } from './sign-up.service';
 
 @NgModule({
     declarations: [
@@ -24,6 +25,7 @@ import { ChangepasswordComponent } from './changepassword/changepassword.compone
         LoginComponent,
         HomeComponent,
         ChangepasswordComponent,
+        ProfilesComponent,
     ],
     imports: [
         BrowserModule,
@@ -32,7 +34,8 @@ import { ChangepasswordComponent } from './changepassword/changepassword.compone
         FormsModule,
         HttpClientModule,
         ToastrModule.forRoot(),
-        ToastaModule.forRoot() // ToastaModule added
+        ToastaModule.forRoot(), // ToastaModule added
+        NgbModule.forRoot()
     ],
     providers: [SignUpService],
     bootstrap: [AppComponent]

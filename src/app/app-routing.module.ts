@@ -4,6 +4,7 @@ import { SignupComponent } from './signup/signup.component';
 import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
 import { ChangepasswordComponent } from './changepassword/changepassword.component';
+import { ProfilesComponent } from './profiles/profiles.component';
 
 const routes: Routes = [
   {
@@ -25,6 +26,10 @@ const routes: Routes = [
   {
     path: 'auth/changepassword',
     component: ChangepasswordComponent
+  },
+  {
+    path: 'profile',
+    component: ProfilesComponent
   }
 ];
 
