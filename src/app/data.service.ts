@@ -24,8 +24,13 @@ export class DataService {
   }
 
   //reset password API
-  postResetPwd(data) {
-    return this.http.post(this.apiUrl + '/auth/forgotpassword', data); //change the rest password url ... sagar
+  postForgotPwd_Email(data) {
+    return this.http.post(this.apiUrl + '/auth/forgotpassword', data);
+  }
+  
+  //reset password API
+  postForgotPwd_NewPwd(data) {
+    return this.http.post(this.apiUrl + '/auth/forgotpassword', data);
   }
 
   //get profile details API using access token

@@ -161,7 +161,7 @@ export class LoginComponent implements OnInit {
     var email$: Object = {
       "email": this.user$['reset_emailid']
     };
-    this.data.postResetPwd(email$).subscribe(data => {
+    this.data.postForgotPwd_Email(email$).subscribe(data => {
       this.data$ = data;
       if (this.data$['status'] == 200) {
         console.log("this.data$:", this.data$);
