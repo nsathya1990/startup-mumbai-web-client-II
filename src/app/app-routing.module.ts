@@ -30,6 +30,10 @@ const routes: Routes = [
   {
     path: 'profile',
     component: ProfilesComponent
+  },
+  {
+    path: 'create-profile',
+    component: HomeComponent
   }
 ];
 

@@ -7,28 +7,41 @@ import { HttpHeaders } from '@angular/common/http';
 })
 export class DataService {
 
+  //apiUrl: String = 'https://startup-mumbai-api-sc.herokuapp.com';
+  apiUrl: String = 'https://startup-mumbai-api-sb.herokuapp.com';
+
   constructor(private http: HttpClient) { }
 
-  //login
+  //login API
   postLogin(data) {
-    return this.http.post('https://startup-mumbai-api-as.herokuapp.com/api/login', data);
+    return this.http.post(this.apiUrl + '/api/login', data);
   }
 
-  //get user details using access token
+  //retirieve user details API using access token after login
   getUserDetails() {
     var access_token = localStorage.getItem('startup-mumbai')
-    const httpOptions = {
-      headers: new HttpHeaders({
-        'Content-Type':  'application/json',
-        'Authorization': access_token
-      })
-    };
-    return this.http.get('https://startup-mumbai-api-as.herokuapp.com/api/me', httpOptions);
+    return this.http.get(this.apiUrl + '/api/me', this.getHttpOptions(access_token));
   }
 
-  //reset password
+  //reset password API
   postResetPwd(data) {
-    return this.http.get('https://startup-mumbai-api-as.herokuapp.com/api/me', data); 
-    //change the rest password url ... sagar
+    return this.http.post(this.apiUrl + '/auth/forgotpassword', data); //change the rest password url ... sagar
+  }
+
+  //get profile details API using access token
+  getProfile() {
+    var access_token = localStorage.getItem('startup-mumbai');
+    return this.http.get(this.apiUrl + '/profile', this.getHttpOptions(access_token));
+  }
+
+  //setting token in the header
+  getHttpOptions(token) {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Authorization': token
+      })
+    };
+    return httpOptions;
   }
 }

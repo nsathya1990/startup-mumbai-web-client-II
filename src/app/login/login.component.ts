@@ -33,6 +33,18 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit() {
+
+    //checking if the user is logged-in
+    var access_token = localStorage.getItem('startup-mumbai');
+    if (!access_token) {
+      this.router.navigate(['/login']);
+    }
+    else {
+      /* this.data.getUserDetails().subscribe(data => {
+        this.router.navigate(['/create-profile']);
+      }); */
+      this.router.navigate(['/home']);
+    }
   }
 
   showRecoverNLoginForm() {
@@ -104,75 +116,71 @@ export class LoginComponent implements OnInit {
     this.data.postLogin(this.user$).subscribe(data => {
 
       this.data$ = data;
+
+      //success ... store access token
+      if (this.data$['status'] == 200) {
+        console.log("[SUCCESS]data$:", this.data$);
+        localStorage.setItem('startup-mumbai', this.data$['token']);
+        this.success$['title'] = "Startup Mumbai";
+        this.success$['message'] = "Successfully logged-in";
+        this.successToast();
+        //log-in after 3 seconds, so that we can make the toastr visible. Remove it later on if we do not need it...
+        setTimeout(() => {
+          /* this.data.getUserDetails().subscribe(data => {
+            if (data['profileType'].length > 0)
+              return this.router.navigate(['/profile']);
+            else
+              return this.router.navigate(['/create-profile']);
+          }); */
+          return this.router.navigate(['/create-profile']);
+        }, 3000);
+      }
       //email-id not registered or password mismatch
-      if (this.data$['status'] == 404) {
-        console.log("status:", this.data$['status']);
+      else if (this.data$['status'] == 404) {
+        console.log("this.data$:", this.data$);
         this.error$['isVisible'] = true;
         this.error$['message'] = this.data$['message'];
         this.errorToast();
       }
-      // success scenario ... receive access token
-      else if (this.data$['status'] == 200) {
-        console.log("data$:", this.data$);
-        localStorage.setItem('startup-mumbai', this.data$['token']);
-        this.data.getUserDetails().subscribe(data => {
-
-          this.success$['title'] = "Startup Mumbai";
-          this.success$['message'] = "Successfully logged-in";
-          this.successToast();
-          //log-in after 3 seconds, so that we can make the toastr visible. Remove it later on if we do not need it...
-          setTimeout(() => {
-            return this.router.navigate(['/']);
-          }, 3000);
-
-        }, (error) => {
-          // any other error from server
-          console.log("error.status:", error.status);
-          this.error$['isVisible'] = true;
-          this.error$['message'] = "Server problem. Please try again after some time";
-          this.errorToast();
-        });
-      }
-      // HTTP Error scenarios ... status: 401
       else {
         console.log("status:", this.data$['status']);
         this.error$['isVisible'] = true;
         this.error$['message'] = "Server problem. Please try again after some time";
         this.errorToast();
       }
+    }, (error) => {
+      // any other error from server
+      console.log("error.status:", error.status);
+      this.error$['isVisible'] = true;
+      this.error$['message'] = "Server problem. Please try again after some time";
+      this.errorToast();
     });
   }
 
   resetPassword() {
-    console.log("Inside resetPassword():", this.user$['reset_emailid']);
-    this.data.postResetPwd(this.user$['reset_emailid']).subscribe(data => {
-
-      if (this.data$['status'] == 404) {
-        console.log("status:", this.data$['status']);
-        this.error$['isVisible'] = true;
-        this.error$['message'] = "Error. Please try again after some time";
-        this.errorToast();
-      }
-      // success scenario ... recieve access token.
-      else if (this.data$['status'] == 401) { //change it to 200 later
-        this.success$['title'] = "Reset Password";
-        this.success$['message'] = "Please click on the link sent to your id to rest your password";
+    var email$: Object = {
+      "email": this.user$['reset_emailid']
+    };
+    this.data.postResetPwd(email$).subscribe(data => {
+      this.data$ = data;
+      if (this.data$['status'] == 200) {
+        console.log("this.data$:", this.data$);
+        this.success$['title'] = "SUCCESS";
+        this.success$['message'] = this.data$['message'];
         this.successToast();
+        setTimeout(() => {
+          return this.showRecoverNLoginForm();
+        }, 3000);
       }
       else {
-        console.log("status:", this.data$['status']);
+        console.log("this.data$:", this.data$);
         this.error$['isVisible'] = true;
-        this.error$['message'] = "Error encountered. Please try again after some time";
+        this.error$['title'] = "ERROR";
+        this.error$['message'] = this.data$['status'];
         this.errorToast();
       }
     }, (error) => {
       console.log("error.status:", error.status);
-      /* this.error$['isVisible'] = true;
-      this.error$['message'] = "Error encountered. Please try again after some time";
-      this.errorToast(); */
-      this.success$['title'] = "Reset Password";
-      this.success$['message'] = "Please click on the link sent to your email-id to rest your password";
-      this.successToast();
       this.showRecoverNLoginForm();
     });
   }
