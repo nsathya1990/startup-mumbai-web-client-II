@@ -38,6 +38,10 @@ const routes: Routes = [
     component: ForgotPasswordComponent
   },
   {
+    path: 'reset-password',
+    component: ForgotPasswordComponent
+  },
+  {
     path: '**',
     component: HomeComponent
   }

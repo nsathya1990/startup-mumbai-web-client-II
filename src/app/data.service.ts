@@ -20,7 +20,7 @@ export class DataService {
   }
   getUserDetails() {
     var access_token = localStorage.getItem('startup-mumbai')
-    return this.http.get(this.apiUrl + '/api/user', this.getHttpOptions(access_token));
+    return this.http.get(this.apiUrl + '/api/user', this.setHttpHeader(access_token));
   }
   /**
    * Login End
@@ -29,14 +29,14 @@ export class DataService {
   /**
    * Reset Password 
    */
-  postResetPwdSendEmail(data) {
+  resetPwdSendEmail(data) {
     return this.http.post(this.apiUrl + '/auth/forgotpassword', data);
   }
-  postResetPwdAuthToken(data) {
-    return this.http.post(this.apiUrl + '/auth/forgotpassword', data);
+  validateToken(data) {
+    return this.http.post(this.apiUrl + '/auth/forgotpassword', data); // UPDATE API URL - FROM SAGAR
   }
-  postResetPwdUpdatePwd(data) {
-    return this.http.post(this.apiUrl + '/auth/forgotpassword', data);
+  resetPwdUpdatePwd(data) {
+    return this.http.post(this.apiUrl + '/auth/forgotpassword', data); // UPDATE API URL - FROM SAGAR
   }
   /**
    * Reset Password End
@@ -45,11 +45,13 @@ export class DataService {
   //get profile details API using access token
   getProfile() {
     var access_token = localStorage.getItem('startup-mumbai');
-    return this.http.get(this.apiUrl + '/profile', this.getHttpOptions(access_token));
+    return this.http.get(this.apiUrl + '/profile', this.setHttpHeader(access_token));
   }
 
-  //setting token in the header
-  getHttpOptions(token) {
+  /**
+   * setting access token in the header
+   */
+  setHttpHeader(token) {
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',

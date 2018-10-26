@@ -28,7 +28,8 @@ export class LoginComponent implements OnInit {
     //checking if the user is logged-in
     var access_token = localStorage.getItem('startup-mumbai');
     if (!access_token) {
-      this.router.navigate(['/login']);
+      //this.router.navigate(['/login']);
+      document.getElementById("loginPage").style.visibility = 'visible'; // form hidden
     }
     else {
       this.navigateNextPage();
@@ -71,7 +72,7 @@ export class LoginComponent implements OnInit {
     var email$: Object = {
       "email": this.user$['reset_emailid']
     };
-    this.data.postResetPwdSendEmail(email$).subscribe(data => {
+    this.data.resetPwdSendEmail(email$).subscribe(data => {
       this.data$ = data;
       if (this.data$['status'] == 200) {
         console.log("this.data$:", this.data$);
@@ -93,12 +94,17 @@ export class LoginComponent implements OnInit {
     this.data.getUserDetails().subscribe(data => {
       this.user$ = data;
       console.log("this.user$:", this.user$);
-      if (this.user$['profileType'].length > 0)
+      if (this.user$['profileType'].length > 0) {
+        this.toastrService.success(this.data$['message'], 'SUCCESS');
         this.router.navigate(['/home']);
-      else
+      }
+      else {
+        this.toastrService.success(this.data$['message'], 'SUCCESS');
         this.router.navigate(['/create-profile']);
+      }
     }, (error) => {
       console.log("error:", error);
+      this.toastrService.error(error['message'], "ERROR");
       this.router.navigate(['/home']);
     });
   }
