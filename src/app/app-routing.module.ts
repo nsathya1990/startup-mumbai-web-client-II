@@ -18,10 +18,6 @@ const routes: Routes = [
     component: HomeComponent
   },
   {
-    path: '',
-    component: HomeComponent
-  },
-  {
     path: 'login',
     component: LoginComponent
   },
@@ -38,8 +34,12 @@ const routes: Routes = [
     component: HomeComponent
   },
   {
-    path: 'forgot-password',
+    path: 'reset-password/:token',
     component: ForgotPasswordComponent
+  },
+  {
+    path: '**',
+    component: HomeComponent
   }
 ];
 

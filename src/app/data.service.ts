@@ -12,26 +12,35 @@ export class DataService {
 
   constructor(private http: HttpClient) { }
 
-  //login API
+  /**
+   * Login
+   */
   postLogin(data) {
     return this.http.post(this.apiUrl + '/api/login', data);
   }
-
-  //retirieve user details API using access token after login
   getUserDetails() {
     var access_token = localStorage.getItem('startup-mumbai')
-    return this.http.get(this.apiUrl + '/api/me', this.getHttpOptions(access_token));
+    return this.http.get(this.apiUrl + '/api/user', this.getHttpOptions(access_token));
   }
+  /**
+   * Login End
+   */
 
-  //reset password API
-  postForgotPwd_Email(data) {
+  /**
+   * Reset Password 
+   */
+  postResetPwdSendEmail(data) {
     return this.http.post(this.apiUrl + '/auth/forgotpassword', data);
   }
-  
-  //reset password API
-  postForgotPwd_NewPwd(data) {
+  postResetPwdAuthToken(data) {
     return this.http.post(this.apiUrl + '/auth/forgotpassword', data);
   }
+  postResetPwdUpdatePwd(data) {
+    return this.http.post(this.apiUrl + '/auth/forgotpassword', data);
+  }
+  /**
+   * Reset Password End
+   */
 
   //get profile details API using access token
   getProfile() {
