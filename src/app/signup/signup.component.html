@@ -1,0 +1,81 @@
+<div class="auth-wrapper d-flex no-block justify-content-center align-items-center" style="background:url(assets/images/big/auth-bg.jpg) no-repeat center center;">
+  <div class="auth-box">
+    <div>
+      <div class="logo">
+        <!-- <span class="db"><img src="assets/images/logo-icon.png" alt="logo" /></span> -->
+        <h5 class="font-medium m-b-20">Sign Up</h5>
+      </div>
+      <!-- Form -->
+      <div class="row">
+        <div class="col-12">
+          <form class="form-horizontal m-t-20" name="registerform" #f="ngForm" (ngSubmit)="f.form.valid && addUser()">
+            <div class="form-group row ">
+              <div class="col-12 ">
+                <input class="form-control form-control-lg" type="text" placeholder="Name" name="name" #name="ngModel"
+                  [(ngModel)]="user.name" [ngClass]="{ 'is-invalid': f.submitted && name.invalid }" required>
+                <div *ngIf="f.submitted && name.invalid" class="invalid-feedback">
+                  <div *ngIf="name.errors.required">*Username is required</div>
+                </div>
+              </div>
+            </div>
+            <div class="form-group row">
+              <div class="col-12 ">
+                <input class="form-control form-control-lg" type="email" placeholder="Email" name="email" #email="ngModel"
+                  [(ngModel)]="user.email" [ngClass]="{ 'is-invalid': f.submitted && email.invalid }" email required>
+                <div *ngIf="f.submitted && email.invalid" class="invalid-feedback">
+                  <div *ngIf="email.errors.required">*Email is required</div>
+                  <div *ngIf="email.errors.email">*Email must be valid</div>
+                </div>
+              </div>
+            </div>
+            <div class="form-group row">
+              <div class="col-12 ">
+                <input class="form-control form-control-lg" type="password" placeholder="Password" name="password"
+                  #password="ngModel" [(ngModel)]="user.password" [ngClass]="{ 'is-invalid': f.submitted && password.invalid }"
+                  required>
+                <div *ngIf="f.submitted && password.invalid" class="invalid-feedback">
+                  <div *ngIf="password.errors.required">*Password is required</div>
+                </div>
+              </div>
+            </div>
+            <div class="form-group row">
+              <div class="col-12 ">
+                <input class="form-control form-control-lg" type="password" placeholder="Confirm Password" name="confirmPwd"
+                  #confirmPwd="ngModel" [(ngModel)]="user.confirmPwd" [ngClass]="{ 'is-invalid': f.submitted && confirmPwd.invalid, 'is-invalid': f.submitted &&  !(confirmPwd.value == password.value)}"
+                  required>
+                <div *ngIf="f.submitted && confirmPwd.invalid" class="invalid-feedback">
+                  <div *ngIf="confirmPwd.errors.required">*Confirm Password is required</div>
+                </div>
+                <div *ngIf="f.submitted &&  !(confirmPwd.value == password.value)" class="invalid-feedback">
+                  <div>*Password Mismatch</div>
+                </div>
+              </div>
+            </div>
+            <div class="form-group row">
+              <div class="col-md-12 ">
+                <div class="custom-control custom-checkbox">
+                  <input type="checkbox" class="custom-control-input" id="customCheck1" name="terms" #terms="ngModel"
+                    [(ngModel)]="user.terms" [ngClass]="{ 'is-invalid': f.submitted && terms.invalid}" required>
+                  <label class="custom-control-label" for="customCheck1">I agree to all <a href="javascript:void(0)">Terms</a></label>
+                  <div *ngIf="f.submitted && terms.invalid" class="invalid-feedback">
+                    <div *ngIf="terms.errors.required">*Please accept the Terms.</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="form-group text-center ">
+              <div class="col-xs-12 p-b-20 ">
+                <button class="btn btn-block btn-lg btn-info" type="submit">SIGN UP</button>
+              </div>
+            </div>
+            <div class="form-group m-b-0 m-t-10 ">
+              <div class="col-sm-12 text-center ">
+                Already have an account? <a href="/login " class="text-info m-l-5 "><b>Sign In</b></a>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
