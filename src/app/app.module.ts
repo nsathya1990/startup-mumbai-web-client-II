@@ -8,7 +8,6 @@ import { FormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ToastrModule } from 'ngx-toastr';
-import { ToastaModule } from 'ngx-toasta';
 
 import { SignupComponent } from './signup/signup.component';
 import { LoginComponent } from './login/login.component';
@@ -36,7 +35,6 @@ import { ForgotPasswordComponent } from './forgot-password/forgot-password.compo
         FormsModule,
         HttpClientModule,
         ToastrModule.forRoot(),
-        ToastaModule.forRoot(), // ToastaModule added
         NgbModule.forRoot()
     ],
     providers: [SignUpService],
