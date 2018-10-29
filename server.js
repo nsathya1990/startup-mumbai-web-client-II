@@ -13,10 +13,7 @@ res.sendFile(path.join(__dirname+'/dist/ngStartupMumbai/index.html'));
 });
 
 // Start the app by listening on the default Heroku port
-var env = process.env.NODE_ENV || 'development';
-if ('development' == env) {
-   // configure stuff here
-    app.use(express.static(__dirname + '/'));   
-} else {
-    app.use(express.static(__dirname + '/'));
-}
+var port = process.env.PORT || 3000;
+app.listen(port, "0.0.0.0", function() {
+console.log("Listening on Port 3000");
+});
