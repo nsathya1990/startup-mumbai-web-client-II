@@ -1,34 +1,46 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { HttpHeaders } from '@angular/common/http';
+
+import { ConfigurationService } from './configuration.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class DataService {
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private config: ConfigurationService) { }
 
-  //login
+  /**
+   * Login
+   */
   postLogin(data) {
-    return this.http.post('https://startup-mumbai-api-as.herokuapp.com/api/login', data);
+    return this.http.post(this.config.apiUrl + '/api/login', data);
   }
-
-  //get user details using access token
   getUserDetails() {
-    var access_token = localStorage.getItem('startup-mumbai')
-    const httpOptions = {
-      headers: new HttpHeaders({
-        'Content-Type':  'application/json',
-        'Authorization': access_token
-      })
-    };
-    return this.http.get('https://startup-mumbai-api-as.herokuapp.com/api/me', httpOptions);
+    return this.http.get(this.config.apiUrl + '/api/user', this.config.setHttpHeader());
   }
+  /**
+   * Login End
+   */
 
-  //reset password
-  postResetPwd(data) {
-    return this.http.get('https://startup-mumbai-api-as.herokuapp.com/api/me', data); 
-    //change the rest password url ... sagar
+  /**
+   * Reset Password 
+   */
+  resetPwdSendEmail(data) {
+    return this.http.post(this.config.apiUrl + '/auth/forgotpassword', data);
+  }
+  validateToken(data) {
+    return this.http.post(this.config.apiUrl + '/auth/forgotpassword', data); // UPDATE API URL - FROM SAGAR
+  }
+  resetPwdUpdatePwd(data) {
+    return this.http.post(this.config.apiUrl + '/auth/forgotpassword', data); // UPDATE API URL - FROM SAGAR
+  }
+  /**
+   * Reset Password End
+   */
+
+  //get profile details API using access token
+  getProfile() {
+    return this.http.get(this.config.apiUrl + '/profile', this.config.setHttpHeader());
   }
 }
