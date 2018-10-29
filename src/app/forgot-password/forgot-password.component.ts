@@ -18,7 +18,6 @@ export class ForgotPasswordComponent implements OnInit {
   constructor(private data: DataService, private router: Router, private route: ActivatedRoute, private toastrService: ToastrService) { }
 
   ngOnInit() {
-    document.getElementById("forgot-pwd-form").hidden = true; //hide the form on form load
     this.route.params.subscribe(params => {
       this.token = params.token;
       return;
@@ -33,18 +32,20 @@ export class ForgotPasswordComponent implements OnInit {
         this.data$ = data;
         //If token valid
         if (this.data$['isValid'] == true) {
-          document.getElementById("forgot-pwd-form").hidden = false;
-          return;
+          return console.log("Token is valid");
         } else {
           this.toastrService.error(this.data$['message'], "ERROR"); //form remain hidden & error message displayed
-          this.router.navigate(['/login']);
+          console.log("Token is invalid");
+          return this.router.navigate(['/login']);
         }
       }, (error) => {
         // any other error from server
         console.log("error.status:", error.status);
         this.toastrService.error(error['message'], "ERROR");
+        console.log("Token is invalid");
+        return this.router.navigate(['/login']);
       });
-    } 
+    }
     else {
       //checking if the user is logged-in ... using access_token
       var access_token = localStorage.getItem('startup-mumbai');
